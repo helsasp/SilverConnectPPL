@@ -1,34 +1,45 @@
-from auth.context import AuthContext
-from friends.context import FriendContext
-from community.context import CommunityContext
-from activities.context import ActivityContext
-from dashboard.context import DashboardContext
-from notifications.context import NotificationContext
+from auth_service.context import AuthContext
+from friends_service.context import FriendContext
+from community_service.context import CommunityContext
+from activities_service.context import ActivityContext
+from dashboard_service.context import DashboardContext
+from notifications_service.context import NotificationContext
 
 def main():
-    print("=== [AUTH FLOW] ===")
-    auth = AuthContext()
-    auth.process()
+    username = "elder1"
+    password = "pass123"
 
-    print("\n=== [FRIENDS FLOW] ===")
-    friends = FriendContext()
-    friends.process()
+    print("=== AUTH SERVICE ===")
+    auth = AuthContext(username=username, password=password)
+    auth.request()  # login
+    auth.request()  # onboarding
 
-    print("\n=== [COMMUNITY FLOW] ===")
-    community = CommunityContext()
-    community.process()
+    print("\n=== FRIENDS SERVICE ===")
+    friends = FriendContext(username=username)
+    friends.request()  # search friends
+    friends.request()  # chat
 
-    print("\n=== [ACTIVITIES FLOW] ===")
-    activity = ActivityContext()
-    activity.process()
+    print("\n=== COMMUNITY SERVICE ===")
+    community = CommunityContext(username=username)
+    community.request()  # browse
+    community.request()  # join
 
-    print("\n=== [DASHBOARD FLOW] ===")
-    dashboard = DashboardContext()
-    dashboard.process()
+    print("\n=== ACTIVITIES SERVICE ===")
+    activities = ActivityContext(username=username)
+    activities.request()  # find activity
+    activities.request()  # book activity
 
-    print("\n=== [NOTIFICATION FLOW] ===")
-    notif = NotificationContext()
-    notif.process()
+    print("\n=== DASHBOARD SERVICE ===")
+    dashboard = DashboardContext(username=username)
+    dashboard.request()  # view dashboard
+    dashboard.set_state(dashboard.profile_state)
+    dashboard.request()  # view profile
+    dashboard.set_state(dashboard.settings_state)
+    dashboard.request()  # update settings
+
+    print("\n=== NOTIFICATIONS SERVICE ===")
+    notifications = NotificationContext(username=username)
+    notifications.request()  # check notifications
 
 if __name__ == "__main__":
     main()
