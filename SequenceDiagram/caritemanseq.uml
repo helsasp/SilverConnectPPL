@@ -1,0 +1,51 @@
+@startuml
+actor Elder
+participant UI
+participant System
+database Database
+
+== Mulai Pencarian Teman ==
+Elder -> UI : klikCariTeman()
+activate UI
+UI -> System : permintaanDaftarTeman()
+activate System
+System -> Database : queryDaftarTeman()
+activate Database
+
+par Ambil Nama dan Minat
+    System -> Database : getNamaTeman()
+    Database --> System : daftarNama
+    System -> Database : getMinatTeman()
+    Database --> System : daftarMinat
+end
+
+System --> UI : daftarTeman(nama, minat)
+deactivate Database
+deactivate System
+UI --> Elder : tampilkanDaftarTeman()
+
+deactivate UI
+
+== Elder Pilih Teman ==
+Elder -> UI : klikTeman(namaTeman)
+activate UI
+UI -> System : permintaanDetailTeman(namaTeman)
+activate System
+
+par Ambil Detail & Tombol
+    System -> Database : getDetailTeman(namaTeman)
+    activate Database
+    Database --> System : detailTeman
+    deactivate Database
+
+    System --> UI : tampilkanDetailTeman(nama, minat)
+    System --> UI : tampilkanTombolAddTeman()
+end
+
+deactivate System
+UI --> Elder : tampilkanDetail + tombol "Add Teman"
+deactivate UI
+
+destroy System
+Elder --> System : [X] (destroy)
+@enduml

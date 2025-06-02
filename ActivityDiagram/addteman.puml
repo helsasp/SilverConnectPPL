@@ -1,0 +1,34 @@
+@startuml
+|Elder|
+start
+
+:Klik tombol "Add Teman";
+
+|System|
+:Periksa apakah sudah berteman?;
+
+if (Sudah Berteman?) then (Ya)
+    :Tampilkan status "Sudah Berteman";
+    stop
+else (Belum)
+    :Kirim permintaan pertemanan;
+    :Simpan status "Permintaan Terkirim";
+    :Kirim notifikasi ke calon teman;
+
+|Elder|
+:Tunggu respon dari calon teman;
+
+|System|
+:Calon teman menerima atau menolak?;
+
+if (Diterima?) then (Ya)
+    :Update status jadi "Teman";
+    |Elder|
+    :Tampilkan "Permintaan Diterima, Sekarang Berteman";
+else (Ditolak)
+    |Elder|
+    :Tampilkan "Permintaan Ditolak";
+endif
+
+stop
+@enduml

@@ -1,0 +1,55 @@
+@startuml
+actor Elder
+participant UI
+participant System
+database Database
+
+== Mulai Chat ==
+Elder -> UI : klikTombolChat()
+activate UI
+UI -> System : getDaftarTeman()
+activate System
+System -> Database : queryTemanLansia()
+activate Database
+Database --> System : hasilTeman[]
+deactivate Database
+System --> UI : tampilkanDaftarTeman()
+deactivate System
+
+alt DaftarTeman kosong
+    UI --> Elder : tampilPesan("Tidak ada teman untuk chat")
+    deactivate UI
+    destroy UI
+    return
+else DaftarTeman tersedia
+    UI --> Elder : tampilkanTeman()
+    Elder -> UI : pilihTeman(temanID)
+    UI -> System : bukaChat(temanID)
+    activate System
+    System --> UI : tampilkanJendelaChat()
+    deactivate System
+end
+
+== Kirim Pesan ==
+par kirim pesan
+    Elder -> UI : ketikPesan("Hai, apa kabar?")
+    UI -> System : kirimPesan("Hai, apa kabar?")
+    activate System
+    System -> Database : simpanPesan()
+    Database --> System : OK
+    deactivate System
+end
+
+par terima balasan
+    System -> System : tungguBalasan()
+    System --> UI : tampilkanPesan("Baik, terima kasih!")
+    UI --> Elder : tampilkanBalasan()
+end
+
+== Lanjutkan atau keluar ==
+Elder -> UI : keluarChat()
+UI -> System : tutupChat()
+destroy System
+deactivate UI
+destroy UI
+@enduml

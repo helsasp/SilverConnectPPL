@@ -1,0 +1,29 @@
+@startuml
+|Elder|
+start
+
+:Klik tombol "Cari Teman";
+
+|System|
+:Ambil semua daftar teman;
+
+fork
+    :Ambil nama teman;
+fork again
+    :Ambil minat/hobi teman;
+end fork
+
+:Menampilkan daftar teman (nama + minat);
+
+|Elder|
+:Klik salah satu teman;
+
+|System|
+fork
+    :Menampilkan detail nama dan minat;
+fork again
+    :Tampilkan tombol "Add Teman";
+end fork
+
+stop
+@enduml

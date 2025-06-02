@@ -1,0 +1,39 @@
+@startuml
+|Elder|
+start
+:Klik tombol "Chat";
+
+|System|
+:Menampilkan daftar teman lansia;
+if (Daftar teman kosong?) then (Ya)
+  |Elder|
+  :Tampilkan pesan "Tidak ada teman untuk chat";
+  stop
+else (Tidak)
+  |Elder|
+  :Pilih teman dari daftar;
+
+  |System|
+  :Buka jendela chat dengan teman;
+
+  fork
+    |Elder|
+    :Ketik dan kirim pesan;
+
+    |System|
+    :Terima pesan dan proses pengiriman;
+
+  fork again
+    |System|
+    :Terima balasan dari teman;
+
+    |Elder|
+    :Tampilkan balasan pesan;
+  endfork
+
+  |Elder|
+  :Lanjutkan chat atau keluar;
+endif
+
+stop
+@enduml

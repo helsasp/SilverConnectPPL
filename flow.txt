@@ -1,0 +1,94 @@
+
+
+Berdasarkan deskripsi lengkap aplikasi *Silverconnect* yang telah disederhanakan (fokus pada *Find Friends, **Find Communities, dan **Find Activities, serta fitur pendukung seperti onboarding, profil), berikut adalah daftar **use case* yang mungkin bisa dibuat. Saya akan mencakup semua fitur utama dan pendukung dari aplikasi tersebut, dengan aktor utama: *Elder, **Community, dan **Admin Sistem*.
+
+---
+
+### Daftar Use Case untuk Aplikasi Silverconnect
+
+#### 1. *Authentication dan Onboarding*
+- *UC01: Mendaftar Akun (Sign Up)*  
+  - *Aktor*: Lansia  
+  - *Deskripsi*: Lansia membuat akun baru dengan mengisi data seperti nama lengkap, username/email, password.  
+  - *Kondisi Awal*: Lansia berada di halaman Sign Up.  
+  - *Alur Normal*: Lansia mengisi form, sistem memvalidasi data, dan akun dibuat.  
+  - *Alur Alternatif*: Data tidak valid (misal: email sudah digunakan), sistem menampilkan pesan error.
+
+- *UC02: Masuk Akun (Sign In)*  
+  - *Aktor*: Lansia  
+  - *Deskripsi*: Lansia masuk ke akun menggunakan username/email dan password.  
+  - *Kondisi Awal*: Lansia berada di halaman Sign In.  
+  - *Alur Normal*: Lansia memasukkan kredensial, sistem memverifikasi, dan lansia diarahkan ke dashboard.  
+  - *Alur Alternatif*: Kredensial salah, sistem menampilkan pesan error.
+
+- *UC03: Lupa Password*  
+  - *Aktor*: Lansia  
+  - *Deskripsi*: Lansia meminta reset password melalui email.  
+  - *Kondisi Awal*: Lansia berada di halaman Sign In dan memilih "Forget Password".  
+  - *Alur Normal*: Lansia memasukkan email, sistem mengirimkan link reset, lansia membuat password baru.  
+  - *Alur Alternatif*: Email tidak ditemukan, sistem menampilkan pesan error.
+
+- *UC04: Gamified Onboarding (Interactive Profile Setup)*  
+  - *Aktor*: Lansia  
+  - *Deskripsi*: Lansia mengisi profil awal melalui mini-game interaktif setelah sign-in pertama.  
+  - *Kondisi Awal*: Lansia baru saja sign-in pertama kali.  
+  - *Alur Normal*: Sistem menampilkan game interaktif (misal: pilih gambar hobi), lansia mengisi data seperti minat dan preferensi, sistem menyimpan data.  
+  - *Alur Alternatif*: Lansia melewati onboarding, sistem menyimpan data default.
+
+#### 2. *Core Features (Fitur Utama)*
+
+- *UC05: Mencari Teman dan Chat Antar Teman*  
+  - *Aktor*: Lansia, Admin Sistem  
+  - *Deskripsi*: Lansia mencari teman berdasarkan minat, melihat profil, dan berkomunikasi via chat pribadi.  
+  - *Kondisi Awal*: Lansia berada di halaman "Find Friends".  
+  - *Alur Normal*: Lansia mencari teman, mengirim permintaan pertemanan, dan memulai chat setelah diterima.  
+  - *Alur Alternatif*: Tidak ada teman yang cocok, atau permintaan ditolak.
+
+- *UC06: Mencari dan Bergabung dengan Komunitas*  
+  - *Aktor*: Lansia, Community, Admin Sistem  
+  - *Deskripsi*: Lansia mencari komunitas berdasarkan minat, bergabung, dan berinteraksi melalui obrolan grup.  
+  - *Kondisi Awal*: Lansia berada di halaman "Find Communities".  
+  - *Alur Normal*: Lansia memilih komunitas, bergabung, dan mengakses obrolan grup.  
+  - *Alur Alternatif*: Komunitas penuh, atau lansia memilih untuk keluar.
+
+- *UC07: Mencari dan Memesan Aktivitas*  
+  - *Aktor*: Lansia, Admin Sistem  
+  - *Deskripsi*: Lansia mencari aktivitas berdasarkan tanggal/jenis, melihat detail, dan memesan slot.  
+  - *Kondisi Awal*: Lansia berada di halaman "Find Activities".  
+  - *Alur Normal*: Lansia memilih aktivitas, memesan, dan menerima konfirmasi.  
+  - *Alur Alternatif*: Slot penuh, atau lansia membatalkan pemesanan.
+
+#### 3. *Dashboard dan Fitur Pendukung*
+
+- *UC08: Melihat Dashboard*  
+  - *Aktor*: Lansia  
+  - *Deskripsi*: Lansia melihat ringkasan jadwal, layanan utama, dan notifikasi di dashboard.  
+  - *Kondisi Awal*: Lansia telah login dan berada di halaman dashboard.  
+  - *Alur Normal*: Sistem menampilkan ucapan selamat, jadwal hari ini, dan layanan (Find Friends, Communities, Activities).  
+  - *Alur Alternatif*: Tidak ada jadwal, sistem menampilkan pesan kosong.
+
+- *UC09: Mengisi Profil (Fill in Profile)*  
+  - *Aktor*: Lansia  
+  - *Deskripsi*: Lansia mengisi data profil seperti jenis kelamin, tanggal lahir, dan kontak darurat.  
+  - *Kondisi Awal*: Lansia berada di halaman "Fill in Profile".  
+  - *Alur Normal*: Lansia mengisi form, sistem menyimpan data.  
+  - *Alur Alternatif*: Data tidak lengkap, sistem meminta pengguna melengkapi.
+
+- *UC10: Mengatur Pengaturan (Settings)*  
+  - *Aktor*: Lansia  
+  - *Deskripsi*: Lansia mengatur preferensi seperti ukuran font, tema, dan notifikasi.  
+  - *Kondisi Awal*: Lansia berada di halaman Settings.  
+  - *Alur Normal*: Lansia memilih pengaturan (misal: tema dark mode), sistem menyimpan perubahan.  
+  - *Alur Alternatif*: Perubahan gagal disimpan, sistem menampilkan pesan error.
+
+#### 4. *Fitur Notifikasi (Opsional)*
+
+- *UC12: Menerima Notifikasi*  
+  - *Aktor*: Lansia, Admin Sistem  
+  - *Deskripsi*: Lansia menerima notifikasi tentang pesan baru, jadwal aktivitas, atau status pertemanan.  
+  - *Kondisi Awal*: Lansia telah mengaktifkan notifikasi di pengaturan.  
+  - *Alur Normal*: Sistem mengirimkan notifikasi (misal: "Anda memiliki pesan baru dari teman"), lansia melihatnya.  
+  - *Alur Alternatif*: Notifikasi dimatikan, sistem tidak mengirimkan pemberitahuan.
+
+
+

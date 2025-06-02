@@ -1,0 +1,44 @@
+@startuml
+|Elder|
+start
+
+:Klik tombol "Community";
+
+|System|
+:Menampilkan daftar komunitas;
+
+fork
+    :Tampilkan nama komunitas;
+    :Tampilkan gambar komunitas;
+    :Tampilkan jumlah member;
+fork again
+    :Tampilkan kolom pencarian;
+end fork
+
+|Elder|
+:Melakukan pencarian komunitas;
+
+|System|
+if (Hasil ditemukan?) then (Ya)
+  :Menampilkan hasil pencarian;
+else (Tidak)
+  :Menampilkan pesan "Komunitas tidak ditemukan";
+endif
+
+|Elder|
+:Klik salah satu komunitas;
+
+|System|
+:Menampilkan detail komunitas;
+
+fork
+    :Tampilkan nama komunitas;
+    :Tampilkan gambar komunitas;
+    :Tampilkan deskripsi;
+    :Tampilkan jumlah member;
+fork again
+    :Tampilkan tombol "Join Community";
+end fork
+
+stop
+@enduml

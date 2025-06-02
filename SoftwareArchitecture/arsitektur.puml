@@ -1,0 +1,83 @@
+@startuml
+package "Arsitektur Microservices Silverconnect" {
+
+  actor "Elder (Lansia)" as elder
+  actor "Komunitas" as community
+  actor "Admin Sistem" as admin
+
+  node "API Gateway" {
+    rectangle "Layanan Autentikasi API" as auth_api
+    rectangle "Layanan Profil API" as profile_api
+    rectangle "Layanan Teman API" as friend_api
+    rectangle "Layanan Komunitas API" as community_api
+    rectangle "Layanan Aktivitas API" as activity_api
+    rectangle "Layanan Dashboard API" as dashboard_api
+    rectangle "Layanan Notifikasi API" as notification_api
+  }
+
+  node "Microservices" {
+    rectangle "Layanan Autentikasi & Pendaftaran" as auth_service
+    rectangle "Layanan Manajemen Profil" as profile_service
+    rectangle "Layanan Manajemen Teman & Chat" as friend_service
+    rectangle "Layanan Manajemen Komunitas" as community_service
+    rectangle "Layanan Manajemen Aktivitas" as activity_service
+    rectangle "Layanan Agregasi Dashboard" as dashboard_service
+    rectangle "Layanan Notifikasi" as notification_service
+  }
+
+  node "Database & Penyimpanan" {
+    rectangle "Database User & Autentikasi (SQL)" as user_db
+    rectangle "Database Profil (SQL/NoSQL)" as profile_db
+    rectangle "Database Pertemanan & Chat (NoSQL, misal MongoDB/Firebase)" as friend_db
+    rectangle "Database Komunitas (SQL/NoSQL)" as community_db
+    rectangle "Database Aktivitas (SQL)" as activity_db
+    rectangle "Cache Dashboard (Redis/Memcached)" as dashboard_cache
+    rectangle "Database Notifikasi (NoSQL/Queue)" as notification_db
+  }
+
+  node "Message Broker" {
+    rectangle "Event Broker (Kafka / RabbitMQ)" as event_broker
+  }
+
+  elder --> auth_api : Daftar / Masuk / Reset Password
+  elder --> profile_api : Isi Profil / Data Onboarding
+  elder --> friend_api : Cari Teman / Tambah Teman / Chat
+  elder --> community_api : Cari & Gabung Komunitas / Chat Grup
+  elder --> activity_api : Cari & Pesan Aktivitas
+  elder --> dashboard_api : Lihat Dashboard
+  elder --> notification_api : Terima Notifikasi
+
+  admin --> auth_api : Kelola Pengguna
+  admin --> community_api : Kelola Komunitas
+  admin --> activity_api : Kelola Aktivitas
+  admin --> notification_api : Kelola Notifikasi
+
+  community --> community_api : Kelola Profil & Anggota Komunitas
+
+  auth_api --> auth_service : Logika Autentikasi & Pendaftaran
+  profile_api --> profile_service : Kelola Profil
+  friend_api --> friend_service : Kelola Pertemanan & Chat
+  community_api --> community_service : Kelola Komunitas
+  activity_api --> activity_service : Kelola Aktivitas & Pemesanan
+  dashboard_api --> dashboard_service : Agregasi Data Dashboard
+  notification_api --> notification_service : Kirim & Kelola Notifikasi
+
+  auth_service --> user_db : Simpan Data Pengguna & Autentikasi
+  profile_service --> profile_db : Simpan Data Profil & Onboarding
+  friend_service --> friend_db : Simpan Data Teman, Permintaan, Chat
+  community_service --> community_db : Simpan Data Komunitas & Keanggotaan
+  activity_service --> activity_db : Simpan Data Aktivitas & Pemesanan
+  dashboard_service --> dashboard_cache : Cache Data Dashboard
+  notification_service --> notification_db : Simpan Notifikasi & Langganan
+
+  auth_service --> event_broker : Publikasi Event (UserTerdaftar, UserMasuk)
+  profile_service --> event_broker : Publikasi Event (ProfilDiperbarui)
+  friend_service --> event_broker : Publikasi Event (PermintaanTemanDikirim, PesanDikirim)
+  community_service --> event_broker : Publikasi Event (KomunitasDimasuki)
+  activity_service --> event_broker : Publikasi Event (AktivitasDipesan)
+
+  notification_service --> event_broker : Langganan Event
+  notification_service --> elder : Kirim Notifikasi (Push/FCM/dll)
+
+}
+@enduml

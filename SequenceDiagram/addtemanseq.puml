@@ -1,0 +1,54 @@
+@startuml
+actor Elder
+participant UI
+participant System
+participant Database
+participant "Calon Teman" as CalonTeman
+
+== Proses Tambah Teman ==
+
+Elder -> UI : klikAddTeman()
+activate UI
+
+UI -> System : terimaPermintaanTambahTeman()
+activate System
+
+System -> Database : cekStatusPertemanan(eldersId, calonId)
+activate Database
+Database --> System : statusPertemanan
+deactivate Database
+
+alt Sudah Berteman
+    System -> UI : tampilkanStatus("Sudah Berteman")
+    deactivate System
+    deactivate UI
+else Belum Berteman
+    System -> Database : simpanPermintaanPertemanan(eldersId, calonId)
+    activate Database
+    Database --> System : konfirmasiSimpan
+    deactivate Database
+    
+    System -> CalonTeman : kirimNotifikasiPermintaan()
+    deactivate System
+    deactivate UI
+
+    Elder -> Elder : tungguRespon()
+
+    CalonTeman -> System : responPermintaan(status)
+    activate System
+
+    alt Diterima
+        System -> Database : updateStatusTeman(eldersId, calonId, "Teman")
+        activate Database
+        Database --> System : konfirmasiUpdate
+        deactivate Database
+        
+        System -> UI : tampilkanPesan("Permintaan Diterima, Sekarang Berteman")
+    else Ditolak
+        System -> UI : tampilkanPesan("Permintaan Ditolak")
+    end
+    deactivate System
+end
+
+destroy System
+@enduml

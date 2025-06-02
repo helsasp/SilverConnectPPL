@@ -1,0 +1,68 @@
+@startuml
+actor Elder
+participant "UI" as UI
+participant "System" as System
+database "Database" as DB
+
+== Elder klik tombol Community ==
+Elder -> UI : klikTombolCommunity()
+activate UI
+UI -> System : getDaftarKomunitas()
+activate System
+System -> DB : queryDaftarKomunitas()
+activate DB
+DB --> System : dataKomunitas[]
+destroy DB
+deactivate DB
+System --> UI : dataKomunitas[]
+deactivate System
+
+== UI tampilkan daftar komunitas ==
+UI -> UI : tampilkanNamaKomunitas()
+activate UI
+UI -> UI : tampilkanGambarKomunitas()
+UI -> UI : tampilkanJumlahMember()
+UI -> UI : tampilkanKolomPencarian()
+deactivate UI
+
+== Elder melakukan pencarian ==
+Elder -> UI : cariKomunitas("kata kunci")
+activate UI
+UI -> System : cariKomunitas("kata kunci")
+activate System
+System -> DB : queryPencarianKomunitas("kata kunci")
+activate DB
+alt Hasil ditemukan
+    DB --> System : hasilPencarian[]
+else Tidak ditemukan
+    DB --> System : []
+end
+destroy DB
+deactivate DB
+System --> UI : hasilPencarian / pesanError
+deactivate System
+UI -> UI : tampilkanHasilPencarian() / tampilkanPesanError()
+deactivate UI
+
+== Elder pilih salah satu komunitas ==
+Elder -> UI : klikKomunitas(id)
+activate UI
+UI -> System : getDetailKomunitas(id)
+activate System
+System -> DB : queryDetailKomunitas(id)
+activate DB
+DB --> System : detailKomunitas
+destroy DB
+deactivate DB
+System --> UI : detailKomunitas
+deactivate System
+
+== UI tampilkan detail komunitas ==
+UI -> UI : tampilkanNamaKomunitas()
+activate UI
+UI -> UI : tampilkanGambarKomunitas()
+UI -> UI : tampilkanDeskripsi()
+UI -> UI : tampilkanJumlahMember()
+UI -> UI : tampilkanTombolJoin()
+deactivate UI
+@enduml
