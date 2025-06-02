@@ -11,7 +11,7 @@ class AuthState(ABC):
 class LoginState(AuthState):
     def handle(self):
         print(f"[Auth] User '{self.context.username}' login attempt...")
-        if self.context.username == "user1" and self.context.password == "pass123":
+        if self.context.username == "elder1" and self.context.password == "pass123":
             print("[Auth] Login successful!")
             self.context.set_state(self.context.onboarding_state)
         else:
