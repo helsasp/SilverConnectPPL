@@ -52,8 +52,10 @@ def main():
 
     print("\n=== FRIENDS SERVICE ===")
     friends = FriendContext(username=auth.username)
-    friends.request()  # search friends
-    friends.request()  # chat
+    friends.request(interest_filter="Yoga")     # filter by interest
+    friends.request(friend_name="Diana")        # lihat detail & add
+    friends.request(interest_filter="Reading")  # filter lainnya
+    friends.request(friend_name="Charlie")      # lihat detail
 
     print("\n=== COMMUNITY SERVICE ===")
     community = CommunityContext(username=auth.username)
