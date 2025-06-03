@@ -4,6 +4,7 @@ from community_service.context import CommunityContext
 from activities_service.context import ActivityContext
 from dashboard_service.context import DashboardContext
 from notifications_service.context import NotificationContext
+from settings_service.context import SettingsContext
 
 def main():
     print("=== SIGNUP ===")
@@ -40,6 +41,14 @@ def main():
     dashboard.request()  # view profile
     dashboard.set_state(dashboard.settings_state)
     dashboard.request()  # update settings
+
+
+    print("\n=== SETTINGS SERVICE ===")
+
+    settings = SettingsContext(username=auth.username)
+    settings.request()  # update font
+    settings.set_state(settings.theme_state)
+    settings.request()  # update theme
 
     print("\n=== FRIENDS SERVICE ===")
     friends = FriendContext(username=auth.username)
