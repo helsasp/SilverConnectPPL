@@ -13,6 +13,14 @@ def main():
     auth = AuthContext(username=username, password=password)
     auth.request()  # login
     auth.request()  # onboarding
+    print("\n=== DASHBOARD SERVICE ===")
+    dashboard = DashboardContext(username=username)
+    dashboard.request()  # view dashboard
+    dashboard.set_state(dashboard.profile_state)
+    dashboard.request()  # view profile
+    dashboard.set_state(dashboard.settings_state)
+    dashboard.request()  # update settings
+
 
     print("\n=== FRIENDS SERVICE ===")
     friends = FriendContext(username=username)
@@ -29,13 +37,6 @@ def main():
     activities.request()  # find activity
     activities.request()  # book activity
 
-    print("\n=== DASHBOARD SERVICE ===")
-    dashboard = DashboardContext(username=username)
-    dashboard.request()  # view dashboard
-    dashboard.set_state(dashboard.profile_state)
-    dashboard.request()  # view profile
-    dashboard.set_state(dashboard.settings_state)
-    dashboard.request()  # update settings
 
     print("\n=== NOTIFICATIONS SERVICE ===")
     notifications = NotificationContext(username=username)
