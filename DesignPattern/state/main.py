@@ -67,8 +67,9 @@ def main():
 
     print("\n=== ACTIVITIES SERVICE ===")
     activities = ActivityContext(username=auth.username)
-    activities.request()
-    activities.request()
+    activities.set_state(activities.find_activity_state)
+    activities.request()  # Browse activities
+    activities.request()  # Show detail and booking
 
     print("\n=== NOTIFICATIONS SERVICE ===")
     notifications = NotificationContext(username=auth.username)

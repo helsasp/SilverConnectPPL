@@ -4,6 +4,7 @@ class ActivityContext:
     def __init__(self, username=""):
         self.username = username
         self.activities = []
+        self.selected_activity = None
         self.booked = False
 
         self.find_activity_state = FindActivityState(self)
