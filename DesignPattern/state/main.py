@@ -15,7 +15,7 @@ def main():
         full_name="Elder One"
     )
     new_user.set_state(new_user.signup_state)
-    new_user.request()  # signup
+    new_user.request()
 
     print("\n=== FORGOT PASSWORD ===")
     forgot_user = AuthContext(
@@ -23,7 +23,7 @@ def main():
         email="elder1@example.com"
     )
     forgot_user.set_state(forgot_user.forgot_password_state)
-    forgot_user.request()  # forgot password
+    forgot_user.request()
 
     print("\n=== AUTH SERVICE ===")
     auth = AuthContext(
@@ -38,38 +38,41 @@ def main():
     dashboard = DashboardContext(username=auth.username)
     dashboard.request()  # view dashboard
     dashboard.set_state(dashboard.profile_state)
-    dashboard.request()  # view profile
+    dashboard.request()
     dashboard.set_state(dashboard.settings_state)
-    dashboard.request()  # update settings
-
+    dashboard.request()
 
     print("\n=== SETTINGS SERVICE ===")
-
     settings = SettingsContext(username=auth.username)
-    settings.request()  # update font
+    settings.request()
     settings.set_state(settings.theme_state)
-    settings.request()  # update theme
+    settings.request()
 
     print("\n=== FRIENDS SERVICE ===")
     friends = FriendContext(username=auth.username)
-    friends.request(interest_filter="Yoga")     # filter by interest
-    friends.request(friend_name="Diana")        # lihat detail & add
-    friends.request(interest_filter="Reading")  # filter lainnya
-    friends.request(friend_name="Charlie")      # lihat detail
+    friends.request(interest_filter="Yoga")
+    friends.request(friend_name="Diana")
+    friends.request(interest_filter="Reading")
+    friends.request(friend_name="Charlie")
 
     print("\n=== COMMUNITY SERVICE ===")
     community = CommunityContext(username=auth.username)
-    community.request()  # browse
-    community.request()  # join
+
+    # Step 1: Browse communities
+    community.set_state(community.browse_community_state)
+    community.request()
+
+    # Step 2: View details and join
+    community.request()
 
     print("\n=== ACTIVITIES SERVICE ===")
     activities = ActivityContext(username=auth.username)
-    activities.request()  # find activity
-    activities.request()  # book activity
+    activities.request()
+    activities.request()
 
     print("\n=== NOTIFICATIONS SERVICE ===")
     notifications = NotificationContext(username=auth.username)
-    notifications.request()  # check notifications
+    notifications.request()
 
 if __name__ == "__main__":
     main()

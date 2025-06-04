@@ -5,6 +5,7 @@ class CommunityContext:
         self.username = username
         self.communities = []
         self.joined = False
+        self.selected_community = None
 
         self.browse_community_state = BrowseCommunityState(self)
         self.join_community_state = JoinCommunityState(self)
