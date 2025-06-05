@@ -58,4 +58,8 @@ class ChatState(FriendState):
             print("[Friends] No friends found to chat.")
             return
         print(f"[Friends] User '{self.context.username}' chatting with '{self.context.friends[0]}'...")
+<<<<<<< HEAD
         print(f"[Friends] Message sent: Hi {self.context.friends[0]}!")
+=======
+        print(f"[Friends] Message sent: Hi {self.context.friends[0]}!")
+>>>>>>> de7dacd (new commit)

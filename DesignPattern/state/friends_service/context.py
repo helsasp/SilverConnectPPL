@@ -39,4 +39,8 @@ class FriendContext:
         self.state = state
 
     def request(self, friend_name=None, interest_filter=None):
+<<<<<<< HEAD
         self.state.handle(friend_name=friend_name, interest_filter=interest_filter)
+=======
+        self.state.handle(friend_name=friend_name, interest_filter=interest_filter)
+>>>>>>> de7dacd (new commit)

@@ -14,4 +14,8 @@ class SettingsContext:
         self.state = state
 
     def request(self):
+<<<<<<< HEAD
         self.state.handle()
+=======
+        self.state.handle()
+>>>>>>> de7dacd (new commit)

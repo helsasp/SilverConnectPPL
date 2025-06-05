@@ -66,4 +66,8 @@ class CheckNotificationState(NotificationState):
         else:
             print("📬 You have new notifications:\n")
             for note in all_notifications:
+<<<<<<< HEAD
                 print(f" - {note}")
+=======
+                print(f" - {note}")
+>>>>>>> de7dacd (new commit)

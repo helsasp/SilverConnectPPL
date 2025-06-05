@@ -71,4 +71,8 @@ class BookActivityState(ActivityState):
             else:
                 print("⚠️ You already booked an activity.")
         else:
+<<<<<<< HEAD
             print("↩️ Booking cancelled.")
+=======
+            print("↩️ Booking cancelled.")
+>>>>>>> de7dacd (new commit)

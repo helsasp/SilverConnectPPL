@@ -59,4 +59,8 @@ class ViewProfileState(DashboardState):
             hobbies = input("Enter hobbies separated by comma: ")
             if hobbies:
                 self.context.hobbies = [h.strip() for h in hobbies.split(",")]
+<<<<<<< HEAD
             print("[✓] Profile updated successfully.")
+=======
+            print("[✓] Profile updated successfully.")
+>>>>>>> de7dacd (new commit)

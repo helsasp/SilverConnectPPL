@@ -26,4 +26,8 @@ class ThemeSettingsState(SettingsState):
             self.context.theme = choice
             print(f"[✓] Theme updated to {choice} mode.")
         else:
+<<<<<<< HEAD
             print("[!] Invalid input. No changes made.")
+=======
+            print("[!] Invalid input. No changes made.")
+>>>>>>> de7dacd (new commit)

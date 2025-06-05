@@ -69,4 +69,8 @@ class JoinCommunityState(DashboardState):
             else:
                 print("⚠️ You have already joined a community.")
         else:
+<<<<<<< HEAD
             print("↩️ Returning without joining.")
+=======
+            print("↩️ Returning without joining.")
+>>>>>>> de7dacd (new commit)

@@ -76,4 +76,8 @@ def main():
     notifications.request()
 
 if __name__ == "__main__":
+<<<<<<< HEAD
     main()
+=======
+    main()
+>>>>>>> de7dacd (new commit)

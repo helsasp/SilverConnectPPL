@@ -43,4 +43,8 @@ class ForgotPasswordState(AuthState):
             print(f"[Auth] Password has been reset to '{self.context.password}' (for simulation only)")
             self.context.set_state(self.context.login_state)
         else:
+<<<<<<< HEAD
             print("[Auth] No email provided. Cannot reset password.")
+=======
+            print("[Auth] No email provided. Cannot reset password.")
+>>>>>>> de7dacd (new commit)
