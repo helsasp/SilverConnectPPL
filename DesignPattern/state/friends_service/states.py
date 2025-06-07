@@ -10,52 +10,52 @@ class FriendState(ABC):
 
 class SearchFriendsState(FriendState):
     def handle(self, friend_name=None, interest_filter=None):
-        print("[Friends] Listing people you may know:")
+        print("[Teman] Menampilkan orang yang mungkin Anda kenal:")
         filtered = self.context.potential_friends
         if interest_filter:
             filtered = [p for p in filtered if interest_filter in p["interest"]]
-            print(f"[Filter] Showing users with interest: {interest_filter}")
+            print(f"[Filter] Menampilkan pengguna dengan minat: {interest_filter}")
 
         if not filtered:
-            print("No users found with that interest.")
+            print("Tidak ada pengguna yang ditemukan dengan minat tersebut.")
         else:
             for person in filtered:
-                print(f"- {person['name']} | Interests: {', '.join(person['interest'])}")
+                print(f"- {person['name']} | Minat: {', '.join(person['interest'])}")
 
-        print("Use request(friend_name='Name') to view details.")
+        print("Gunakan request(friend_name='Nama') untuk melihat detail.")
         self.context.set_state(self.context.friend_detail_state)
 
 class FriendDetailState(FriendState):
     def handle(self, friend_name=None, interest_filter=None):
         if not friend_name:
-            print("[Friends] Please provide a name to view details.")
+            print("[Teman] Silakan masukkan nama untuk melihat detail.")
             return
 
         match = next((p for p in self.context.potential_friends if p["name"] == friend_name), None)
         if not match:
-            print(f"[Friends] No details found for {friend_name}.")
+            print(f"[Teman] Tidak ditemukan detail untuk {friend_name}.")
             return
 
-        print(f"\n=== Detail for {match['name']} ===")
-        print(f"Photo: {match['photo']}")
-        print(f"Name: {match['name']}")
-        print(f"Age: {match['age']}")
-        print(f"Interest: {', '.join(match['interest'])}")
-        print(f"Description: {match['description']}")
+        print(f"\n=== Detail untuk {match['name']} ===")
+        print(f"Foto: {match['photo']}")
+        print(f"Nama: {match['name']}")
+        print(f"Usia: {match['age']}")
+        print(f"Minat: {', '.join(match['interest'])}")
+        print(f"Deskripsi: {match['description']}")
 
         if match['name'] in self.context.added_friends:
-            print("Status: Already your friend ✅")
+            print("Status: Sudah menjadi teman Anda ✅")
         else:
-            print("Action: [Add Friend]")
+            print("Aksi: [Tambah Teman]")
             self.context.added_friends.append(match['name'])
-            print(f"✅ Friend request sent to {match['name']}!")
+            print(f"✅ Permintaan pertemanan dikirim ke {match['name']}!")
 
         self.context.set_state(self.context.search_friends_state)
 
 class ChatState(FriendState):
     def handle(self, friend_name=None, interest_filter=None):
         if not self.context.friends:
-            print("[Friends] No friends found to chat.")
+            print("[Teman] Tidak ada teman untuk diajak mengobrol.")
             return
-        print(f"[Friends] User '{self.context.username}' chatting with '{self.context.friends[0]}'...")
-        print(f"[Friends] Message sent: Hi {self.context.friends[0]}!")
+        print(f"[Teman] Pengguna '{self.context.username}' sedang mengobrol dengan '{self.context.friends[0]}'...")
+        print(f"[Teman] Pesan terkirim: Hai {self.context.friends[0]}!")

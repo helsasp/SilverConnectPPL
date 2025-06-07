@@ -10,63 +10,63 @@ class DashboardState(ABC):
 
 class BrowseCommunityState(DashboardState):
     def handle(self):
-        print("\n🧑‍🤝‍🧑 Browse Communities:\n")
+        print("\n🧑‍🤝‍🧑 Jelajahi Komunitas:\n")
         self.context.communities = [
             {
                 "id": 1,
-                "name": "Gardening Club",
+                "name": "Klub Berkebun",
                 "photo": "🌱",
-                "description": "A place for plant lovers to share tips and stories.",
+                "description": "Tempat untuk para pecinta tanaman berbagi tips dan cerita.",
                 "members": 12
             },
             {
                 "id": 2,
-                "name": "Book Reading Group",
+                "name": "Kelompok Baca Buku",
                 "photo": "📚",
-                "description": "Join fellow readers and discuss your favorite books.",
+                "description": "Bergabung dengan sesama pembaca dan diskusikan buku favoritmu.",
                 "members": 8
             },
             {
                 "id": 3,
-                "name": "Walking Buddies",
+                "name": "Teman Jalan Kaki",
                 "photo": "🚶",
-                "description": "Find walking partners around your neighborhood.",
+                "description": "Cari teman jalan kaki di sekitar lingkunganmu.",
                 "members": 15
             }
         ]
 
         for idx, community in enumerate(self.context.communities, 1):
-            print(f"[{idx}] {community['photo']} {community['name']} - {community['members']} members")
+            print(f"[{idx}] {community['photo']} {community['name']} - {community['members']} anggota")
 
-        choice = input("\nSelect a community to view details (1-3): ")
+        choice = input("\nPilih komunitas untuk lihat detail (1-3): ")
         if choice.isdigit() and 1 <= int(choice) <= len(self.context.communities):
             selected = self.context.communities[int(choice) - 1]
             self.context.selected_community = selected
             self.context.set_state(self.context.join_community_state)
         else:
-            print("❗ Invalid selection, returning to dashboard.")
+            print("❗ Pilihan tidak valid, kembali ke dashboard.")
 
 class JoinCommunityState(DashboardState):
     def handle(self):
         community = self.context.selected_community
-        print(f"\n📄 Community Detail:\n")
+        print(f"\n📄 Detail Komunitas:\n")
         print(f"{community['photo']} {community['name']}")
-        print(f"📃 Description: {community['description']}")
-        print(f"👥 Members: {community['members']}")
+        print(f"📃 Deskripsi: {community['description']}")
+        print(f"👥 Jumlah Anggota: {community['members']}")
 
-        join = input("\nDo you want to join this community? (y/n): ").lower()
+        join = input("\nApakah kamu ingin bergabung dengan komunitas ini? (y/n): ").lower()
         if join == "y":
             if not self.context.joined:
                 self.context.joined = True
-                print(f"✅ You have successfully joined {community['name']}!")
-                print("💬 Entering the community group chat...\n")
+                print(f"✅ Kamu berhasil bergabung dengan {community['name']}!")
+                print("💬 Masuk ke obrolan grup komunitas...\n")
 
-                # Simulasi group chat
-                print(f"[{community['name']} Group Chat]")
-                print("👤 Admin: Welcome to the group!")
-                print("👵 Grandma Sue: Excited to share my gardening tips!")
-                print("👴 Grandpa Rick: Let’s plant tomatoes together 🌿")
+                # Simulasi obrolan grup
+                print(f"[Grup {community['name']}]")
+                print("👤 Admin: Selamat datang di grup!")
+                print("👵 Nenek Sue: Tidak sabar membagikan tips berkebun saya!")
+                print("👴 Kakek Rick: Ayo tanam tomat bersama 🌿")
             else:
-                print("⚠️ You have already joined a community.")
+                print("⚠️ Kamu sudah bergabung dengan komunitas.")
         else:
-            print("↩️ Returning without joining.")
+            print("↩️ Kembali tanpa bergabung.")

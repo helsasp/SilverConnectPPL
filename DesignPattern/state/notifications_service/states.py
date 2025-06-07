@@ -12,46 +12,46 @@ class NotificationState(ABC):
 
 class CheckNotificationState(NotificationState):
     def handle(self):
-        print(f"\n🔔 Checking notifications for user '{self.context.username}'...\n")
+        print(f"\n🔔 Memeriksa notifikasi untuk pengguna '{self.context.username}'...\n")
 
-        # Simulated notification categories
+        # Kategori notifikasi simulasi
         chat_messages = [
-            "💬 Anna says: 'Will you be at the music session later?'",
-            "💬 David: 'Good morning! Don’t forget our gardening meetup today 🌿'",
-            "💬 Lisa: 'How are you feeling today? Let's catch up soon.'"
+            "💬 Anna berkata: 'Apakah kamu akan hadir di sesi musik nanti?'",
+            "💬 David: 'Selamat pagi! Jangan lupa pertemuan berkebun kita hari ini 🌿'",
+            "💬 Lisa: 'Bagaimana kabarmu hari ini? Yuk ngobrol sebentar.'"
         ]
 
         activity_reminders = [
-            "📅 Tai Chi at 8:00 AM in the garden – don’t forget your mat!",
-            "🎨 Painting Class at 2:00 PM in Room B3 – brushes provided.",
-            "🧁 Baking Workshop starts at 10:30 AM in the community kitchen."
+            "📅 Tai Chi jam 8:00 pagi di taman – jangan lupa bawa matras!",
+            "🎨 Kelas Melukis jam 14:00 di Ruang B3 – kuas sudah disediakan.",
+            "🧁 Workshop Membuat Kue dimulai jam 10:30 di dapur komunitas."
         ]
 
         community_updates = [
-            "👥 Welcome Margaret (Age 71) from Riverside Apartments to the Wellness Community!",
-            "👥 Mr. Leo (Age 68) has joined the Poetry Club – feel free to greet him!",
-            "👥 New member alert: Grandma Elsie (Age 76) – she loves knitting and storytelling!"
+            "👥 Selamat datang Margaret (Usia 71) dari Apartemen Riverside ke Komunitas Kesehatan!",
+            "👥 Pak Leo (Usia 68) telah bergabung dengan Klub Puisi – jangan ragu untuk menyapanya!",
+            "👥 Anggota baru: Nenek Elsie (Usia 76) – beliau suka merajut dan bercerita!"
         ]
 
         wellness_tips = [
-            "🧘 Tip of the Day: Gentle stretching each morning helps improve balance.",
-            "🍵 Health Tip: Stay hydrated and drink herbal teas to soothe your body.",
-            "🌞 Don’t forget to spend 10 minutes in the sunshine for Vitamin D!"
+            "🧘 Tips Hari Ini: Peregangan ringan setiap pagi membantu meningkatkan keseimbangan.",
+            "🍵 Tips Kesehatan: Tetap terhidrasi dan minum teh herbal untuk menenangkan tubuh.",
+            "🌞 Jangan lupa berjemur 10 menit di bawah sinar matahari untuk Vitamin D!"
         ]
 
         event_announcements = [
-            "🎉 Monthly Birthday Celebration this Friday at 4 PM – join us in the Hall!",
-            "🎤 Talent Show Night: Share your hobby or skill this Saturday at 6 PM!",
-            "🎶 Live music in the courtyard tomorrow morning – bring a friend!"
+            "🎉 Perayaan Ulang Tahun Bulanan Jumat ini jam 16:00 – bergabunglah di Aula!",
+            "🎤 Malam Unjuk Bakat: Tunjukkan hobi atau keahlianmu Sabtu jam 18:00!",
+            "🎶 Musik langsung di halaman besok pagi – ajak teman juga ya!"
         ]
 
         inspiration_quotes = [
-            "🕊️ 'You're never too old to set another goal or to dream a new dream.' – C.S. Lewis",
-            "🌟 'Age is merely the number of years the world has been enjoying you!'",
-            "❤️ 'A smile is the best makeup anyone can wear – especially you.'"
+            "🕊️ 'Kamu tidak pernah terlalu tua untuk menetapkan tujuan baru atau bermimpi lagi.' – C.S. Lewis",
+            "🌟 'Usia hanyalah angka yang menunjukkan berapa lama dunia telah menikmati kehadiranmu!'",
+            "❤️ 'Senyuman adalah riasan terbaik yang bisa dipakai siapa pun – terutama kamu.'"
         ]
 
-        # Combine a few from each category
+        # Menggabungkan beberapa dari tiap kategori
         all_notifications = random.sample(chat_messages, k=1) + \
                             random.sample(activity_reminders, k=1) + \
                             random.sample(community_updates, k=1) + \
@@ -62,8 +62,8 @@ class CheckNotificationState(NotificationState):
         self.context.notifications = all_notifications
 
         if not all_notifications:
-            print("📭 No new notifications.")
+            print("📭 Tidak ada notifikasi baru.")
         else:
-            print("📬 You have new notifications:\n")
+            print("📬 Kamu memiliki notifikasi baru:\n")
             for note in all_notifications:
                 print(f" - {note}")

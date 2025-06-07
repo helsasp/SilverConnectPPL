@@ -10,53 +10,50 @@ class DashboardState(ABC):
 
 class ViewDashboardState(DashboardState):
     def handle(self):
-        print(f"\n👋 Hello, {self.context.username.capitalize()}! Welcome to SilverConnect 🌿")
-        print("Your personalized dashboard for elderly well-being and social connection:\n")
+        print(f"\n👋 Halo, {self.context.username.capitalize()}! Selamat datang di SilverConnect 🌿")
+        print("Dasbor personal Anda untuk kesejahteraan lansia dan koneksi sosial:\n")
 
-        # Top buttons
-        print("🔘 [ Community ]    🔘 [ Activity ]    🔘 [ Friend ]\n")
+        # Tombol atas
+        print("🔘 [ Komunitas ]    🔘 [ Aktivitas ]    🔘 [ Teman ]\n")
 
-        # Lists owned by the user
-        print("🧑‍🤝‍🧑 Your Communities:")
-        print("- Gardening Club")
-        print("- Book Reading Group")
-        print("- Local Walking Buddies\n")
+        # Daftar milik pengguna
+        print("🧑‍🤝‍🧑 Komunitas Anda:")
+        print("- Klub Berkebun")
+        print("- Kelompok Baca Buku")
+        print("- Teman Jalan Kaki Lokal\n")
 
-        print("🎯 Your Activities:")
-        print("- Morning Yoga at 8AM")
-        print("- Chair Aerobics at 10AM")
-        print("- Online Memory Game\n")
+        print("🎯 Aktivitas Anda:")
+        print("- Yoga Pagi jam 08.00")
+        print("- Aerobik Kursi jam 10.00")
+        print("- Permainan Memori Online\n")
 
-        print("👥 Your Friends:")
-        print("- Aunt May")
-        print("- Grandpa Joe")
-        print("- Nana Lily\n")
+        print("👥 Teman Anda:")
+        print("- Bibi May")
+        print("- Kakek Joe")
+        print("- Nenek Lily\n")
 
-        # Options
-        print("📋 Options:")
-        print("[1] Update Profile")
+        # Opsi
+        print("📋 Opsi:")
+        print("[1] Perbarui Profil")
 
 class ViewProfileState(DashboardState):
     def handle(self):
-        print(f"[Dashboard] Showing profile of user '{self.context.username}'")
+        print(f"[Dasbor] Menampilkan profil pengguna '{self.context.username}'")
+        print(f"👤 Nama Lengkap: {self.context.full_name}")
+        print(f"📅 Tanggal Lahir: {self.context.dob}")
+        print(f"📸 URL Foto: {self.context.photo_url}")
+        print(f"🎨 Hobi: {', '.join(self.context.hobbies)}")
+
+        choice = input("Apakah Anda ingin mengedit profil? (y/n): ").lower()
+        if choice == "y":
+            self.context.full_name = input("Masukkan nama lengkap: ") or self.context.full_name
+            self.context.dob = input("Masukkan tanggal lahir (YYYY-MM-DD): ") or self.context.dob
+            self.context.photo_url = input("Masukkan URL foto: ") or self.context.photo_url
+            hobbies = input("Masukkan hobi, pisahkan dengan koma: ")
+            if hobbies:
+                self.context.hobbies = [h.strip() for h in hobbies.split(",")]
+            print("[✓] Profil berhasil diperbarui.")
 
 class SettingsState(DashboardState):
     def handle(self):
-        print(f"[Dashboard] User '{self.context.username}' updating settings")
-class ViewProfileState(DashboardState):
-    def handle(self):
-        print(f"[Dashboard] Showing profile of user '{self.context.username}'")
-        print(f"👤 Full Name: {self.context.full_name}")
-        print(f"📅 Date of Birth: {self.context.dob}")
-        print(f"📸 Photo URL: {self.context.photo_url}")
-        print(f"🎨 Hobbies: {', '.join(self.context.hobbies)}")
-
-        choice = input("Do you want to edit your profile? (y/n): ").lower()
-        if choice == "y":
-            self.context.full_name = input("Enter full name: ") or self.context.full_name
-            self.context.dob = input("Enter date of birth (YYYY-MM-DD): ") or self.context.dob
-            self.context.photo_url = input("Enter photo URL: ") or self.context.photo_url
-            hobbies = input("Enter hobbies separated by comma: ")
-            if hobbies:
-                self.context.hobbies = [h.strip() for h in hobbies.split(",")]
-            print("[✓] Profile updated successfully.")
+        print(f"[Dasbor] Pengguna '{self.context.username}' sedang memperbarui pengaturan")
