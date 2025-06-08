@@ -28,6 +28,7 @@ class FriendContext:
             }
         ]
         self.added_friends = []
+        self.liked_friends = []
 
         self.search_friends_state = SearchFriendsState(self)
         self.chat_state = ChatState(self)
@@ -38,5 +39,5 @@ class FriendContext:
     def set_state(self, state):
         self.state = state
 
-    def request(self, friend_name=None, interest_filter=None):
-        self.state.handle(friend_name=friend_name, interest_filter=interest_filter)
+    def request(self, friend_name=None, interest_filter=None, action=None):
+        self.state.handle(friend_name=friend_name, interest_filter=interest_filter, action=action)

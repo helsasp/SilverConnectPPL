@@ -25,13 +25,42 @@ class OnboardingState(AuthState):
 
 class SignupState(AuthState):
     def handle(self):
-        print(f"[Auth] Mendaftarkan pengguna dengan email '{self.context.email}'...")
-        # Simulasi penyimpanan akun
-        if self.context.email and self.context.password and self.context.full_name:
-            print(f"[Auth] Akun berhasil dibuat untuk '{self.context.email}' dengan nama '{self.context.full_name}'")
-            self.context.set_state(self.context.login_state)
-        else:
+        print(f"[Auth] Mendaftarkan pengguna dengan email '{self.context.email}' dan username '{self.context.username}'...")
+        
+        if not (self.context.email and self.context.password and self.context.confirm_password and self.context.username and self.context.full_name):
             print("[Auth] Gagal mendaftar: Informasi tidak lengkap.")
+            return
+        
+        if self.context.password != self.context.confirm_password:
+            print("[Auth] Gagal mendaftar: Password dan konfirmasi password tidak sama.")
+            return
+        
+        # Simulasi penyimpanan akun berhasil
+        print(f"[Auth] Akun berhasil dibuat untuk '{self.context.email}' dengan username '{self.context.username}' dan nama '{self.context.full_name}'")
+        self.context.set_state(self.context.profile_setup_state)
+
+class ProfileSetupState(AuthState):
+    def handle(self):
+        print(f"[Auth] Silakan lengkapi profil untuk pengguna '{self.context.username}'")
+        
+        # Pilih mode: pertemanan / cinta
+        mode = input("Pilih mode (pertemanan/cinta): ").strip().lower()
+        while mode not in ['pertemanan', 'cinta']:
+            print("Mode tidak valid. Pilih 'pertemanan' atau 'cinta'.")
+            mode = input("Pilih mode (pertemanan/cinta): ").strip().lower()
+        self.context.mode = mode
+
+        # Input hobi (pisahkan dengan koma jika lebih dari satu)
+        hobbies = input("Masukkan hobi (pisahkan dengan koma jika lebih dari satu): ").strip()
+        self.context.hobbies = [h.strip() for h in hobbies.split(',') if h.strip()]
+
+        # Cerita pengalaman
+        story = input("Ceritakan pengalamanmu (singkat): ").strip()
+        self.context.story = story
+
+        print(f"[Auth] Profil lengkap dengan mode '{self.context.mode}', hobi {self.context.hobbies}, dan cerita pengalaman tersimpan.")
+        # Setelah selesai, lanjut ke login
+        self.context.set_state(self.context.login_state)
 
 class ForgotPasswordState(AuthState):
     def handle(self):

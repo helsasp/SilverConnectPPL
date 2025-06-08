@@ -15,7 +15,7 @@ class FindActivityState(ActivityState):
             {
                 "id": 1,
                 "name": "Yoga Pagi",
-                "time": "07:00 WIB",
+                "time": "Senin, 3 Juni (07:00 - 09:00) WIB",
                 "location": "Taman Komunitas",
                 "photo": "🧘",
                 "description": "Sesi yoga lembut untuk memulai hari.",
@@ -24,7 +24,7 @@ class FindActivityState(ActivityState):
             {
                 "id": 2,
                 "name": "Kelas Memasak",
-                "time": "11:00 WIB",
+                "time": "Selasa, 4 Juni (11:00 - 13.00 WIB)",
                 "location": "Dapur Pusat Lansia",
                 "photo": "👩‍🍳",
                 "description": "Belajar memasak makanan sehat bersama.",
@@ -33,7 +33,7 @@ class FindActivityState(ActivityState):
             {
                 "id": 3,
                 "name": "Terapi Seni",
-                "time": "14:00 WIB",
+                "time": "Rabu, 5 Juni (14:00 - 15:00 WIB)",
                 "location": "Aula Seni",
                 "photo": "🎨",
                 "description": "Ekspresikan emosi melalui lukisan.",
