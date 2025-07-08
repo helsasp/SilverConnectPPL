@@ -22,14 +22,6 @@ Used in selected services (e.g., notifications, authentication) to manage intern
 
 ---
 
----
-
-## 🧑‍💻 Author
-
-- **Helsa Putri**  
-  GitHub: [@helsasp](https://github.com/helsasp)
-
----
 
 ## 📚 Academic Context
 
